@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86e490cf5688e274290c62828bd5b94a, type: 3}
+  m_Name: pistol
+  m_EditorClassIdentifier: 
+  weaponName: pistol
+  fireRate: 0.5
+  sprite: {fileID: 21300000, guid: f174d4c3148637b4ebf72a9134201c6f, type: 3}
+  damage: 30
+  shootSound: {fileID: 8300000, guid: fff34fb00213153469983f1a7544d703, type: 3}
+  nextLevelWeapon: {fileID: 11400000, guid: 852aff8c842419540be1cffe4b31e068, type: 2}
