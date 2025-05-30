@@ -7,27 +7,32 @@ using UnityEngine.UI;
 public class PlayerController : MonoBehaviour
 {
     
-    [SerializeField] private int health=250;
-    [SerializeField] private float speed;
+    public int health=250;
+    public float speed=8f;
     [SerializeField] private FixedJoystick joystick;
     private Vector2 input;
     private Rigidbody2D rb;
     public Animator animator;
     public GameObject gameovermenu;
-    private int currentHealth;
+    public int currentHealth;
     private Vector3 startPosition; 
     public AudioManager audioManager;
     Image fillImage;
     float zamanlayici = 0f;
     float tekrarSuresi = 0.5f;
     public Slider healthBar;
-    private void Start(){
+    public TextMeshProUGUI grenadeText;
+    public GameObject grenadePrefab;
+    public bool grenadeUsed = false;
+
+    private void Start()
+    {
         Time.timeScale = 1f;
         currentHealth = health;
-        startPosition = gameObject.transform.position; 
-        healthBar.maxValue=health;
-        healthBar.value=health;
-        fillImage= healthBar.fillRect.GetComponent<Image>();
+        startPosition = gameObject.transform.position;
+        healthBar.maxValue = health;
+        healthBar.value = health;
+        fillImage = healthBar.fillRect.GetComponent<Image>();
     }
     private void Awake() {
         rb=GetComponent<Rigidbody2D>();
@@ -71,11 +76,27 @@ public class PlayerController : MonoBehaviour
     }
     }
     }
-    
-    private void FixedUpdate() {
-    Vector2 adjustedInput = (transform.rotation.eulerAngles.y == 180) ? new Vector2(-input.x, input.y) : input;
-    rb.MovePosition(transform.position + transform.TransformDirection(adjustedInput * speed * Time.fixedDeltaTime));
-}
+
+    private void FixedUpdate()
+    {
+        Vector2 adjustedInput = (transform.rotation.eulerAngles.y == 180) ? new Vector2(-input.x, input.y) : input;
+        rb.MovePosition(transform.position + transform.TransformDirection(adjustedInput * speed * Time.fixedDeltaTime));
+    }
+   
+    public void ThrowGrenade()
+    {
+        if (grenadeUsed) return;
+
+        Instantiate(grenadePrefab, transform.position, Quaternion.identity);
+        grenadeText.text = "0";
+        grenadeUsed = true;
+    }
+
+    public void ResetGrenade()
+    {
+        grenadeUsed = false;
+        grenadeText.text = "1";
+    }
 
     public void ResetPlayer()
     {
@@ -102,7 +123,15 @@ public class PlayerController : MonoBehaviour
             Die();
         }
     }
-
+    public void UpdatePlayerStats()
+    {
+        this.health +=(this.health*health)/100; // Assuming health is given in percentage
+        this.speed += (this.speed*speed)/100f; // Assuming speed is given in percentage
+        healthBar.maxValue = health;
+        healthBar.value = health;
+        fillImage.color = Color.green; // Reset color to green when stats are updated
+        Debug.Log("Player stats updated: Health = " + health + ", Speed = " + speed);
+    }
     private void Die()
     {
         Time.timeScale = 0f;

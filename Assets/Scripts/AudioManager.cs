@@ -19,6 +19,8 @@ public class AudioManager : MonoBehaviour
     public AudioClip zombieSound;
     public AudioClip playerHitSound;
 
+    public AudioClip GrenadeExplosion;
+
 
     private void Start()
     {

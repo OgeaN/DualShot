@@ -15,7 +15,7 @@ public class GameSettingsConroller : MonoBehaviour
         myButton.onClick.AddListener(OnButtonClick);
     }
 
-    void OnButtonClick()
+    public void OnButtonClick()
     {
         if (settingsMenu.activeSelf)
         {

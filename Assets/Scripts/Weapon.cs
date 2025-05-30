@@ -16,7 +16,7 @@ public class Weapon : MonoBehaviour
     public float firstBulletTime=0.1f;
     private float lastFireTime = 0f;
     private bool isShooting = false;
-
+    public Material weaponMaterial; // Silahın malzemesi
     public GameObject shootparticle;
     public AudioManager audioManager;
     Bullet bulletScript;
@@ -108,6 +108,7 @@ void Update()
         {
              GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
         GameObject bulletParticle=Instantiate(shootparticle,firePoint.position,firePoint.rotation);
+        weaponMaterial.SetColor("_BaseColor", weaponData.baseColor); // Silahın rengini ayarla
         Bullet bulletScript = bullet.GetComponent<Bullet>();
         bulletScript.SetDamage(weaponData.damage); 
         StartCoroutine(destroyParticle(bulletParticle));

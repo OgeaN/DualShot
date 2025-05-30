@@ -1,6 +1,6 @@
 using UnityEngine;
 using TMPro; // TextMeshPro desteği için
-
+using System.Collections.Generic;
 public class WaveEndScreenManager : MonoBehaviour
 {
     public GameObject waveEndScreen; // Wave sonu ekranı (panel veya canvas)
@@ -9,8 +9,9 @@ public class WaveEndScreenManager : MonoBehaviour
     public PlayerController playerController; // PlayerController referansı
     public Enemy enemyController; // EnemyController referansı
 
-
     public WeaponManager weaponManager;
+    
+
     void OnEnable()
     {
         WaveManager.WaveEnded += ShowWaveEndScreen;
@@ -30,31 +31,24 @@ public class WaveEndScreenManager : MonoBehaviour
     {
         waveEndText.text = $"Wave {waveNumber} Completed!"; // Ekrandaki metni güncelle
         waveEndScreen.SetActive(true); // Wave bitiş ekranını göster
+        waveEndScreen.GetComponent<CardManager>().ShowCards();
     }
 
     
-    public void OnNextWaveButtonClicked()
+    
+    public void ApplyCardEffects(CardSO card)
     {
+        GameModifiers.Instance.enemyDropChanceMultiplier*=1 + (card.extraWeaponDropChance / 100f);
+        GameModifiers.Instance.enemyHealthMultiplier*=1 + (card.extraEnemyHealth / 100f);
+        GameModifiers.Instance.enemySpeedMultiplier*=1 + (card.extraEnemySpeed / 100f);
+        GameModifiers.Instance.enemyDamageMultiplier*=1 + (card.extraEnemyDamage / 100f);
+        waveManager.spawnDelay -= waveManager.spawnDelay * card.extraEnemySpawnRate/ 100f;
+        playerController.currentHealth += (int)(playerController.currentHealth * card.extraPlayerHealth / 100f);
+        playerController.speed += playerController.speed * card.extraPlayerSpeed / 100f;
+    }
         
-        waveEndScreen.SetActive(false); 
-        waveManager.StartNextWave();
     }
-
-    public void OnNextWaveButtonClicked2()
-    {
-       
-        waveEndScreen.SetActive(false); 
-        waveManager.StartNextWave();
-    }
-
-    public void OnNextWaveButtonClicked3()
-    {
-        
-        waveEndScreen.SetActive(false); 
-        waveManager.StartNextWave();
-    }
-
-
+     
 
     /*
     daha fazla silah düşme şansı
@@ -66,4 +60,4 @@ public class WaveEndScreenManager : MonoBehaviour
     daha fazla karakter canı
     daha fazla karakter hızı
     */
-}
+

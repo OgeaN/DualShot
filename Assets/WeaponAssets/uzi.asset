@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponName: uzi
   fireRate: 0.2
-  sprite: {fileID: 21300000, guid: ad3d22a5668aa8a4398f383b6e35db77, type: 3}
+  sprite: {fileID: 21300000, guid: a3646e59cf7be974396b9edd54282d5f, type: 3}
   damage: 30
+  baseColor: {r: 0, g: 1, b: 0.4, a: 1}
   shootSound: {fileID: 8300000, guid: fb4fd76f0c0978843abeca928fe53020, type: 3}
   nextLevelWeapon: {fileID: 11400000, guid: 253e9661b9339274993a4650e049c0f5, type: 2}

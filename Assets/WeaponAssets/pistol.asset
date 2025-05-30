@@ -16,5 +16,6 @@ MonoBehaviour:
   fireRate: 0.5
   sprite: {fileID: 21300000, guid: f174d4c3148637b4ebf72a9134201c6f, type: 3}
   damage: 30
+  baseColor: {r: 1, g: 0.8, b: 0.4, a: 1}
   shootSound: {fileID: 8300000, guid: fff34fb00213153469983f1a7544d703, type: 3}
   nextLevelWeapon: {fileID: 11400000, guid: 852aff8c842419540be1cffe4b31e068, type: 2}

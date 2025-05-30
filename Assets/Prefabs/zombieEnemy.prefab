@@ -72,7 +72,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 11
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
   m_Color: {r: 0, g: 0, b: 0, a: 0.6117647}
   m_FlipX: 0
@@ -1279,7 +1279,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 200
-  speed: 3
+  speed: 4
   damageInterval: 1
   damage: 50
   animator: {fileID: 7277765237895373037}
@@ -1289,6 +1289,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: a8c486c0fc556a946b151779440cefd7, type: 2}
   playerInventory: {fileID: 0}
   weaponPrefab: {fileID: 3584984701824697469, guid: 1105a1d7688fd264ab627d809eccaafd, type: 3}
+  DropChance: 15
 --- !u!95 &7277765237895373037
 Animator:
   serializedVersion: 5

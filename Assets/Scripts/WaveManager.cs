@@ -25,7 +25,7 @@ public class WaveManager : MonoBehaviour
     public TextMeshProUGUI wavetext;
     public TextMeshProUGUI wavetimertext;
     public WeaponManager weaponManager;
-
+    public PlayerController player;
     public Inventory inventory;
     void Start()
     {
@@ -72,22 +72,22 @@ public class WaveManager : MonoBehaviour
         enemyDamageMultiplier = 1f + (waveNumber - 1) * 0.2f; 
         waveDuration+=waveDuration*0.1f;
         spawnDelay =spawnDelay-spawnDelay*0.1f;
-     
+    
+        
+        
         WaveStarted?.Invoke(waveNumber, enemySpeedMultiplier, enemyDamageMultiplier,enemyHealthMultiplier,spawnDelay);
-
+        
         Debug.Log($"Wave {waveNumber} başladı! Süre: {waveDuration}sn, Hız Çarpanı: {enemySpeedMultiplier},Can Çarpanı {enemyHealthMultiplier}, Hasar Çarpanı: {enemyDamageMultiplier}");
     }
 
     public void EndWave()
     {
         isWaveActive = false;
-        inventoryUI.SetActive(true); 
+        
 
-        PlayerController player = FindObjectOfType<PlayerController>();
-        if (player != null)
-        {
-            player.ResetPlayer();
-        }
+        
+        
+        
         
         DestroyAllEnemies();
   
@@ -95,8 +95,8 @@ public class WaveManager : MonoBehaviour
 
         Debug.Log($"Wave {waveNumber} bitti! Kart seçimi başlıyor.");
 
-       
-
+       player.ResetGrenade();
+        player.ResetPlayer();
         waveNumber++;
     }
 
@@ -115,4 +115,4 @@ public class WaveManager : MonoBehaviour
                 weaponManager.ChangeWeapon(0,inventory.Handweapons[0]);
                 weaponManager.ChangeWeapon(1,inventory.Handweapons[1]);
     }
-}
+} 

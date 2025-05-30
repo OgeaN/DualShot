@@ -25,6 +25,7 @@ public class Enemy : MonoBehaviour
     public List<WeaponData> possibleDrops;
     public Inventory playerInventory;
     public GameObject weaponPrefab;
+    public float DropChance=15f;
     void Start()
     {
         
@@ -65,6 +66,7 @@ public class Enemy : MonoBehaviour
     void OnWaveStarted(int waveNumber, float speedMultiplier, float damageMultiplier,float healthMultipler,float spawnDelay)
     {
         UpdateStats(speedMultiplier, damageMultiplier,healthMultipler);
+        
     }
 
     public void UpdateStats(float speedMultiplier, float damageMultiplier,float healthMultipler)
@@ -75,8 +77,11 @@ public class Enemy : MonoBehaviour
         }
         speed *= speedMultiplier;
         health*=healthMultipler;
+        damageInterval /= speedMultiplier;
         damage = Mathf.RoundToInt(damage * damageMultiplier);
         Debug.Log($"Enemy güncellendi: Hız = {speed}, Hasar = {damage}, Sağlık = {health}");
+        slider.maxValue = health;
+        UpdateSliderHealth(health); 
     }
 
     private void ApplyInitialWaveModifiers()
@@ -87,6 +92,8 @@ public class Enemy : MonoBehaviour
             float damageMultiplier = WaveManager.Instance.enemyDamageMultiplier;
             float healthMultipler = WaveManager.Instance.enemyHealthMultiplier;
             UpdateStats(speedMultiplier, damageMultiplier,healthMultipler);
+            UpdateStats(GameModifiers.Instance.enemySpeedMultiplier, GameModifiers.Instance.enemyDamageMultiplier, GameModifiers.Instance.enemyHealthMultiplier);
+            DropChance*=GameModifiers.Instance.enemyDropChanceMultiplier; 
         }
     }
 
@@ -95,7 +102,7 @@ public class Enemy : MonoBehaviour
     if (possibleDrops.Count > 0 && weaponPrefab != null)
     {
         // Prefabı sahneye instantiate et
-        if (Random.Range(0, 100) <50) // 0-4 arasındaki değerler için çalışır (%5 ihtimal)
+        if (Random.Range(0, 100) < DropChance) // DropChance yüzdelik bir değer olarak ayarlanır
         {
             WeaponData droppedWeapon = possibleDrops[Random.Range(0, possibleDrops.Count)];
             GameObject weaponObject = Instantiate(weaponPrefab, transform.position, Quaternion.identity);

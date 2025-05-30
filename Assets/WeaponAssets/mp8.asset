@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponName: mp8
   fireRate: 0.25
-  sprite: {fileID: 21300000, guid: 47a1a36f00db67d499a35c2516aaa883, type: 3}
+  sprite: {fileID: 21300000, guid: a295f85db34fc6d4d92e5d6bfdcac1b5, type: 3}
   damage: 45
+  baseColor: {r: 1, g: 0.10980392, b: 0.10980392, a: 1}
   shootSound: {fileID: 8300000, guid: 2812dc8d429fce54c837dbe8113e676f, type: 3}
   nextLevelWeapon: {fileID: 11400000, guid: 6924dad666b6c0d4eac65a74fb479e99, type: 2}

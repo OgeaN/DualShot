@@ -9,6 +9,8 @@ public class WeaponData : ScriptableObject
     public float fireRate;
     public Sprite sprite;
     public int damage;
+
+    public Color baseColor;
     public AudioClip shootSound;
     public WeaponData nextLevelWeapon;
 }
